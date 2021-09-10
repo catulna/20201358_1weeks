@@ -1,20 +1,26 @@
 #include <SDL.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-//창 크기 변경, 색상 변경
+//창 크기 변경, 색상 변경, 창 종료
 
 SDL_Window* g_pWindow = 0;
 SDL_Renderer* g_pRenderer = 0;
-bool g_bRunning = false;
+bool g_bRunning = false; 
 
 //함수 선언
 bool init(const char* title, int xpos, int ypos, int height, int width, int flags)
 ;
 void render();
+void running();
 
 //메인
 int main(int argc, char* args[])
 {
+
+ SDL_Event event;
+
 
   if(init("Breaking up SDL", 
           SDL_WINDOWPOS_CENTERED, 
@@ -31,10 +37,18 @@ int main(int argc, char* args[])
 
   while (g_bRunning)
   {
+    running();
     render();
-  }
 
-  SDL_Quit();
+    while(SDL_PollEvent(&event)) // x를 누르면 창이 종료되는 코드
+    {
+      switch(event.type)
+      {
+        case SDL_QUIT: g_bRunning = false; 
+        break;
+      }
+    }
+  }
  
   return 0;
 }
@@ -43,6 +57,8 @@ int main(int argc, char* args[])
 bool init(const char* title, int xpos, int ypos, int height, int width, int flags)
 {
   
+  srand(time(NULL)); // 난수 초기화
+
   if(SDL_Init(SDL_INIT_EVERYTHING) >= 0)
   {
     g_pWindow = SDL_CreateWindow(title, xpos, ypos, height, width, flags);
@@ -57,8 +73,9 @@ bool init(const char* title, int xpos, int ypos, int height, int width, int flag
     return false;
   }
 
-  SDL_SetRenderDrawColor(g_pRenderer, 0, 103, 163, 255); 
-  //RGB값 변경. 0, 0, 0 검정색 -> 181, 227, 216 민트색 ->  0, 103, 163 파랑색
+  SDL_SetRenderDrawColor(g_pRenderer, rand() % 255 , rand() % 255, rand() % 255, 255); 
+  //RGB값 변경. 
+  // 시작할 때마다 무작위로 색상을 변경함. 투명도는 고정. 
 
   return true;
 }
@@ -67,4 +84,9 @@ void render()
 {
   SDL_RenderClear(g_pRenderer);
   SDL_RenderPresent(g_pRenderer);
+}
+
+void running()
+{
+
 }
