@@ -35,16 +35,16 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
   SDL_FreeSurface(pTempSurFace);
 
   SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
-  m_sourceRectangle.x = 50;
-  m_sourceRectangle.y = 50;
+  m_sourceRectangle.x = 0;
+  m_sourceRectangle.y = 0;
 
-  m_destinationRectangle.w = m_sourceRectangle.w = 50;
-  m_destinationRectangle.h = m_sourceRectangle.h = 50;
+  m_destinationRectangle.w = m_sourceRectangle.w = 640;
+  m_destinationRectangle.h = m_sourceRectangle.h = 480;
 
 
 
-  m_destinationRectangle.x = 40;
-  m_destinationRectangle.y = 40;
+  m_destinationRectangle.x = 0;
+  m_destinationRectangle.y = 0;
   
   m_bRunning =  true;
   return true;
