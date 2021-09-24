@@ -1,6 +1,9 @@
 #include "Game.h"
 #include "SDL_image.h"
 
+//위치 변경
+
+
 
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
@@ -14,7 +17,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
       if(m_pRenderer != 0)
       {
-        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
+        SDL_SetRenderDrawColor(m_pRenderer, 74, 168, 216, 255);
       }
       else 
       {
@@ -30,22 +33,21 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     return false;
   }
 
-  SDL_Surface* pTempSurFace = IMG_Load("Assets/animate-alpha.png");
+  SDL_Surface* pTempSurFace = IMG_Load ("Assets/Test2.png");
 
   m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurFace);
   SDL_FreeSurface(pTempSurFace);
 
-  
-  m_sourceRectangle.x = 0;
-  m_sourceRectangle.y = 0;
+  SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
 
-  m_destinationRectangle.w = m_sourceRectangle.w = 128;
-  m_destinationRectangle.h = m_sourceRectangle.h = 82;
+  m_destinationRectangle.w = m_sourceRectangle.w;
+  m_destinationRectangle.h = m_sourceRectangle.h;
 
 
+// 위치 변경
+  m_destinationRectangle.x = 265; m_sourceRectangle.x = 0;
+  m_destinationRectangle.y = 195; m_sourceRectangle.y = 0;
 
-  m_destinationRectangle.x = 0;
-  m_destinationRectangle.y = 0;
   
   m_bRunning =  true;
   return true;
@@ -61,7 +63,7 @@ void Game::render()
 
 void Game::update()
 {
-  m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
+
 }
 
 bool Game::running()
