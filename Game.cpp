@@ -1,8 +1,5 @@
 #include "Game.h"
 
-//위치 변경
-//배경 투명화가 된 이미지를 제작 후 출력해봤는데 투명화가 되지 않아서 찾아봤지만 어떻게 수정해야하는 지를 모르겠습니다...
-
 
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
@@ -32,21 +29,22 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     return false;
   }
 
-  SDL_Surface* pTempSurFace = SDL_LoadBMP("Assets/Test.bmp");
+  SDL_Surface* pTempSurFace = SDL_LoadBMP("Assets/rider.bmp");
 
   m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurFace);
   SDL_FreeSurface(pTempSurFace);
 
   SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
+  m_sourceRectangle.x = 0;
+  m_sourceRectangle.y = 0;
 
-  m_destinationRectangle.w = m_sourceRectangle.w;
-  m_destinationRectangle.h = m_sourceRectangle.h;
+  m_destinationRectangle.w = m_sourceRectangle.w = 50;
+  m_destinationRectangle.h = m_sourceRectangle.h = 50;
 
 
-// 위치 변경
-  m_destinationRectangle.x = 265; m_sourceRectangle.x = 0;
-  m_destinationRectangle.y = 195; m_sourceRectangle.y = 0;
 
+  m_destinationRectangle.x = 0;
+  m_destinationRectangle.y = 0;
   
   m_bRunning =  true;
   return true;
