@@ -1,9 +1,6 @@
 #include "Game.h"
 #include "SDL_image.h"
 
-//위치 변경
-
-
 
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
@@ -17,7 +14,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
       if(m_pRenderer != 0)
       {
-        SDL_SetRenderDrawColor(m_pRenderer, 74, 168, 216, 255);
+        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
       }
       else 
       {
@@ -33,21 +30,22 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     return false;
   }
 
-  SDL_Surface* pTempSurFace = IMG_Load ("Assets/Test2.png");
+  SDL_Surface* pTempSurFace = IMG_Load("Assets/animate-alpha.png"); 
 
   m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurFace);
   SDL_FreeSurface(pTempSurFace);
 
-  SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
+  
+  m_sourceRectangle.x = 0;
+  m_sourceRectangle.y = 0;
 
-  m_destinationRectangle.w = m_sourceRectangle.w;
-  m_destinationRectangle.h = m_sourceRectangle.h;
+  m_destinationRectangle.w = m_sourceRectangle.w = 128;
+  m_destinationRectangle.h = m_sourceRectangle.h = 82;
 
 
-// 위치 변경
-  m_destinationRectangle.x = 265; m_sourceRectangle.x = 0;
-  m_destinationRectangle.y = 195; m_sourceRectangle.y = 0;
 
+  m_destinationRectangle.x = 100;
+  m_destinationRectangle.y = 100;
   
   m_bRunning =  true;
   return true;
@@ -57,13 +55,15 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 void Game::render()
 {
   SDL_RenderClear(m_pRenderer);
-  SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+  //SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+  SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 45, 0, SDL_FLIP_HORIZONTAL); //반대로
+  //SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 30, 0, SDL_FLIP_VERTICAL); //뒤집기
   SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::update()
 {
-
+  m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 80) % 6); 
 }
 
 bool Game::running()
