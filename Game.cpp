@@ -29,17 +29,17 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     return false;
   }
 
-  SDL_Surface* pTempSurFace = SDL_LoadBMP("Assets/rider.bmp");
+  SDL_Surface* pTempSurFace = SDL_LoadBMP("Assets/animate.bmp");
 
   m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurFace);
   SDL_FreeSurface(pTempSurFace);
 
-  SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
+  
   m_sourceRectangle.x = 0;
   m_sourceRectangle.y = 0;
 
-  m_destinationRectangle.w = m_sourceRectangle.w = 640;
-  m_destinationRectangle.h = m_sourceRectangle.h = 480;
+  m_destinationRectangle.w = m_sourceRectangle.w = 128;
+  m_destinationRectangle.h = m_sourceRectangle.h = 82;
 
 
 
@@ -60,7 +60,7 @@ void Game::render()
 
 void Game::update()
 {
-
+  m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
 }
 
 bool Game::running()
