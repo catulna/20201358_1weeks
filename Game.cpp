@@ -70,7 +70,7 @@ void Game::render()
   //m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
   //m_textureManager.drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
 
-  TextureManager::Instance()->draw("animate", 0, 0, 128, 82, m_pRenderer);
+  TextureManager::Instance()->draw("animate", 0, 50, 128, 82, m_pRenderer);
   TextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
   SDL_RenderPresent(m_pRenderer);
   
