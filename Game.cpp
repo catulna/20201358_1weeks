@@ -14,7 +14,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
       if(m_pRenderer != 0)
       {
-        SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
+        SDL_SetRenderDrawColor(m_pRenderer, 0, 128, 0, 255);
       }
       else 
       {
@@ -30,7 +30,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     return false;
   }
 
-  SDL_Surface* pTempSurFace = IMG_Load("Assets/animate-alpha.png"); 
+  /*SDL_Surface* pTempSurFace = IMG_Load("Assets/animate-alpha.png"); 
 
   m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurFace);
   SDL_FreeSurface(pTempSurFace);
@@ -45,7 +45,10 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 
   m_destinationRectangle.x = 100;
-  m_destinationRectangle.y = 100;
+  m_destinationRectangle.y = 100;*/
+
+  m_textureManager.load("Assets/animate-alpha.png", "animate", m_pRenderer);
+  
   
   m_bRunning =  true;
   return true;
@@ -56,14 +59,18 @@ void Game::render()
 {
   SDL_RenderClear(m_pRenderer);
   //SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
-  SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 45, 0, SDL_FLIP_HORIZONTAL); //반대로
+  //SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 45, 0, SDL_FLIP_HORIZONTAL); //반대로
   //SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 30, 0, SDL_FLIP_VERTICAL); //뒤집기
+  //m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+  m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+  m_textureManager.drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
   SDL_RenderPresent(m_pRenderer);
+  
 }
 
 void Game::update()
 {
-  m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 80) % 6); 
+  m_currentFrame = ((SDL_GetTicks() / 100) % 6); 
 }
 
 bool Game::running()
