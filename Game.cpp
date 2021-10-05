@@ -47,7 +47,12 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
   m_destinationRectangle.x = 100;
   m_destinationRectangle.y = 100;*/
 
-  m_textureManager.load("Assets/animate-alpha.png", "animate", m_pRenderer);
+  //m_textureManager.load("Assets/animate-alpha.png", "animate", m_pRenderer);
+
+  if( !TextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer))
+  {
+    return false;
+  }
   
   
   m_bRunning =  true;
@@ -62,8 +67,11 @@ void Game::render()
   //SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 45, 0, SDL_FLIP_HORIZONTAL); //반대로
   //SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, 30, 0, SDL_FLIP_VERTICAL); //뒤집기
   //m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
-  m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
-  m_textureManager.drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
+  //m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+  //m_textureManager.drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
+
+  TextureManager::Instance()->draw("animate", 0, 0, 128, 82, m_pRenderer);
+  TextureManager::Instance()->drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
   SDL_RenderPresent(m_pRenderer);
   
 }
