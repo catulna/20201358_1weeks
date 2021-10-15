@@ -3,6 +3,8 @@
 
 #include "SDL.h"
 #include "TextureManager.h"
+#include "GameObject.h"
+#include "Player.h"
 
 class Game{
   public: 
@@ -25,6 +27,9 @@ class Game{
     //SDL_Rect m_sourceRectangle;
     //SDL_Rect m_destinationRectangle;
     bool m_bRunning;
+
+    GameObject m_go;
+    Player m_player;
 };
 
 #endif
