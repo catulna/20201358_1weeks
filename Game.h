@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Player.h"
+#include <vector>
 
 class Game{
   public: 
@@ -28,8 +29,10 @@ class Game{
     //SDL_Rect m_destinationRectangle;
     bool m_bRunning;
 
-    GameObject m_go;
-    Player m_player;
+    //GameObject m_go;
+    //Player m_player;
+
+    std::vector<GameObject*> m_gameobjects;
 };
 
 #endif
