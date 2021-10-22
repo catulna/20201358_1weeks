@@ -26,8 +26,23 @@ class Game{
     SDL_Renderer* m_pRenderer;
     bool m_bRunning;
 
-
     std::vector<GameObject*> m_gameobjects;
+   
+    static Game* s_pInstance;
+
+  public:
+   static Game* Instance() {
+     if(s_pInstance == 0)
+     {
+       s_pInstance = new Game();
+       return s_pInstance;
+     }
+     return s_pInstance;
+   }
+
+  SDL_Renderer* getRenderer() const {return m_pRenderer;}
 };
+
+typedef Game TheGame;
 
 #endif

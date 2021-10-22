@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "SDL_image.h"
 
-
+Game* Game::s_pInstance = 0;
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
@@ -65,7 +65,6 @@ void Game::render()
 
 void Game::update()
 {
-  m_currentFrame = ((SDL_GetTicks() / 100) % 6); 
 
   for(int i = 0; i < m_gameobjects.size(); i++)
   {
