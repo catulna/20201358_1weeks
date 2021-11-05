@@ -12,6 +12,7 @@ void Enemy::draw()
 
 void Enemy::update()
 {
+  SDLGameObject::update(); 
   m_currentFrame = ((SDL_GetTicks() / 100) % 6); //움직임
   //m_x += 1;
   //m_y += 1;
