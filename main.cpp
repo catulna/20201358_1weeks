@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <iostream>
 
 Game* g_game = 0;
 const int FPS = 60;
